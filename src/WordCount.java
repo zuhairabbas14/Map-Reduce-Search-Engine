@@ -16,8 +16,8 @@ import java.util.StringTokenizer;
 
 public class WordCount {
 
-    public static class Map extends Mapper<LongWritable, Text, Text, IntWritable>{
-        
+    public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
+
         public void enumerator(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             String line = value.toString();
             StringTokenizer tokenizer = new StringTokenizer(line);
@@ -27,7 +27,7 @@ public class WordCount {
 
             }
         }
-        
+
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             // example: this is edureka class 3 is
 
@@ -57,14 +57,14 @@ public class WordCount {
     }
 
     public static class Reduce extends Reducer<Text, IntWritable, Text, IntWritable> {
-        
+
         public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
             // this, (1)
             // is, (1, 1)
             // edureka, (1)
             // class, (1)
-            int sum=0;
-            for (IntWritable x: values) {
+            int sum = 0;
+            for (IntWritable x : values) {
                 sum += x.get();
                 // sum = 1
                 // sum = 2
@@ -80,7 +80,7 @@ public class WordCount {
     public static void main(String[] args) throws Exception {
 
         Configuration conf = new Configuration();
-        
+
         Job job = Job.getInstance(conf, "WordCount");
 
         job.setJarByClass(WordCount.class);
@@ -105,7 +105,5 @@ public class WordCount {
         outputPath.getFileSystem(conf).delete(outputPath, true);
 
         System.exit(job.waitForCompletion(true) ? 0 : 1);
-
-
     }
 }
