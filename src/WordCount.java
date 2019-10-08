@@ -86,6 +86,7 @@ public class WordCount {
 //        job.setMapper(Map.class);
 //        job.setReducer(Reduce.class);
 
+
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
