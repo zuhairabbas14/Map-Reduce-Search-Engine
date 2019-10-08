@@ -1,4 +1,4 @@
-package search_engine;
+package src;
 
 import java.io.IOException;
 import java.net.URI;
