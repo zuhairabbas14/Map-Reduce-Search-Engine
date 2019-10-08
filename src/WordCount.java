@@ -8,7 +8,6 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
-import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 import java.io.IOException;
@@ -84,8 +83,8 @@ public class WordCount {
         Job job = Job.getInstance(conf, "WordCount");
 
         job.setJarByClass(WordCount.class);
-        job.setMapper(Map.class);
-        job.setReducer(Reduce.class);
+//        job.setMapper(Map.class);
+//        job.setReducer(Reduce.class);
 
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
@@ -93,16 +92,16 @@ public class WordCount {
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
-        java.nio.file.Path outputPath = new Path(args[1]);
+//        java.nio.file.Path outputPath = new Path(args[1]);
 
         // configuring the input/output path from the filesystem into the job
         FileInputFormat.addInputPath(job, new Path(args[0]));
-        FileOutputFormat.seteOutputPath(job, new Path(args[1]));
+//        FileOutputFormat.seteOutputPath(job, new Path(args[1]));
 
         // hadoop jar wordcount.jar /input /output
         // input and output directories as two arguments
 
-        outputPath.getFileSystem(conf).delete(outputPath, true);
+//        outputPath.getFileSystem(conf).delete(outputPath, true);
 
         System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
